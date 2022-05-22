@@ -13,4 +13,16 @@ day 1: initailize the setup .installed the necessary dependencies for node js (e
 mongoose - for odm purpose
 )
 
-day2: create authentication using passport js
+day2: create authentication using jwt
+
+day3:auth route /login post authenticate /login get login page /signup post new user /signup page get send signup page json
+
+day4:post blog / ->retrieve data from all with categories
+/create -> post request
+
+            blog - schema {
+                  id:"",
+                  name:user,
+                  img,
+                  content
+            }
