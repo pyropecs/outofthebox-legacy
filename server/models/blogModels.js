@@ -1,7 +1,7 @@
 // we need to create schema
 
-const { Schema, model } = require("mongoose");
-
+const { Schema, createConnection } = require("mongoose");
+const dotenv = require("dotenv").config();
 const blogSchema = new Schema(
   {
     name: {
@@ -20,7 +20,11 @@ const blogSchema = new Schema(
   { timestamps: true }
 );
 
-const blog = model("blog", blogSchema);
+const blogConnection = createConnection(process.env.MONGODB2_URI, (ss) =>
+  console.log(ss)
+);
+const blog = blogConnection.model("blog", blogSchema);
+
 module.exports = {
   blog,
 };

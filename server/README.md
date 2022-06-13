@@ -28,3 +28,8 @@ day4:post blog / ->retrieve data from all with categories
             }
 
 day5 :jump into front end part started create home page
+day6:refactoring has been for connecting multiplr databases
+day7:frontend for dropdown menu
+day 8 :authentication
+
+day :8->authentication

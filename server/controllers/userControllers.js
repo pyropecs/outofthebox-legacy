@@ -3,14 +3,21 @@ const { user } = require("../models");
 const morgan = require("morgan");
 
 const signUpController = async (req, res, next) => {
-  const users = await user.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
-  res.json({
-    users,
-  });
+  const apple = await req.body;
+  console.log(apple);
+  try {
+    const users = await user.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.json({
+      users,
+    });
+  } catch (err) {
+    console.log(err.message);
+    res.json(err.message);
+  }
 
   next();
 };

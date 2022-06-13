@@ -1,11 +1,11 @@
 import App from "../App.jsx";
 import { Routes, Route } from "react-router-dom";
-import { Login } from "../components/login/index.jsx";
+import { SignUpRoute } from "./signUp";
 const index = () => {
   return (
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<SignUpRoute />} />
     </Routes>
   );
 };
