@@ -33,3 +33,5 @@ day7:frontend for dropdown menu
 day 8 :authentication
 
 day :8->authentication
+
+whats validate the form if form fails to validate redirect to sign up page
