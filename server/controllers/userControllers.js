@@ -1,33 +1,34 @@
 // signIncontroller
 const { user } = require("../models");
-const morgan = require("morgan");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config();
+
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: maxAge });
+};
 
 const signUpController = async (req, res, next) => {
-  const apple = await req.body;
-  console.log(apple);
+  const { email, password, name } = await req.body;
+
   try {
     const users = await user.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
+      name,
+      email,
+      password,
     });
-    res.json({
-      users,
-    });
+
+    //token
+    const token = createToken(users._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(201).json({ users: users.name });
   } catch (err) {
-    console.log(err.message);
     res.json(err.message);
   }
 
   next();
 };
 
-const getUsers = async (req, res, next) => {
-  const getUsers = await user.find();
-
-  res.send(getUsers);
-};
 module.exports = {
   signUpController,
-  getUsers,
 };

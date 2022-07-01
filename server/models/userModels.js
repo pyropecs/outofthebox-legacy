@@ -2,6 +2,7 @@
 const { Schema, createConnection } = require("mongoose");
 const dotenv = require("dotenv").config();
 const { isEmail } = require("validator");
+
 const userConnection = createConnection(process.env.MONGODB1_URI);
 const bcrypt = require("bcrypt");
 const userSchema = new Schema(

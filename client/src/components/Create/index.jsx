@@ -1,6 +1,8 @@
-import React from "react";
+import { useEffect } from "react";
+import { useContext } from "react";
 
-export const CreateComponent = ({ aple }) => {
-  console.log(aple);
-  return <div>index</div>;
+export const CreateComponent = ({ nameContext }) => {
+  const { UserName } = useContext(nameContext);
+
+  return <div className="">hi {UserName.users}</div>;
 };

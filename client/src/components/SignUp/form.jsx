@@ -18,8 +18,10 @@ export const Form = ({ SubmitDataHandler, setEmail, setName, setPassword }) => {
           onChange={(e) => setName(e.target.value)}
         />
       </div>
+
       <div className="mb-4 md:w-full">
         <label className="block text-xs mb-1">Username or Email</label>
+
         <input
           className="w-full border rounded p-2 outline-none focus:shadow-outline"
           type="email"

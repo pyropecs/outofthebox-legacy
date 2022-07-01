@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "./form";
+import validator from "validator";
+import { nameContext } from "../../context";
 
 export const SignUp = () => {
   let navigate = useNavigate();
@@ -9,9 +11,7 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resData, setResData] = useState("");
-  useEffect(() => {
-    console.log(resData);
-  }, [resData]);
+  const { setUserName } = useContext(nameContext);
   if (resData) {
     navigate("/create", { replace: true });
   }
@@ -26,12 +26,14 @@ export const SignUp = () => {
 
     let res = await fetch("http://localhost:5000/signup", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
+
       body: JSON.stringify(userData),
     });
     let resDatas = await res.json();
-    console.log(resDatas);
     setResData(resDatas);
+    setUserName(resDatas);
   }
 
   return (

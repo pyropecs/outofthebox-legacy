@@ -1,16 +1,20 @@
 const express = require("express");
 const cors = require("cors");
-
+const cookieParser = require("cookie-parser");
 const { homePage } = require("./controllers/homeController");
 const app = express();
 const dotenv = require("dotenv").config();
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
 
 const { urlencoded } = require("express");
 const userRoute = require("./routes/userRoute");
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
 app.use(userRoute);
