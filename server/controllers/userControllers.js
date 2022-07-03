@@ -1,6 +1,7 @@
 // signIncontroller
 const { user } = require("../models");
 const jwt = require("jsonwebtoken");
+const { compareSync } = require("bcrypt");
 const dotenv = require("dotenv").config();
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -23,10 +24,17 @@ const signUpController = async (req, res, next) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ users: users.name });
   } catch (err) {
-    res.json(err.message);
+    console.log(err);
+    res.status(400).json(err.code);
   }
 
   next();
+};
+
+//login_post
+const loginController = async (req, res, next) => {
+  const { email, password } = req.body;
+  const users = await user.login();
 };
 
 module.exports = {

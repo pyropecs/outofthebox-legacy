@@ -13,8 +13,10 @@ export const SignUp = () => {
   const [resData, setResData] = useState("");
   const { setUserName } = useContext(nameContext);
   if (resData) {
+    console.log(resData);
     navigate("/create", { replace: true });
   }
+  useEffect(() => {}, [resData]);
 
   async function SubmitDataHandler(e) {
     e.preventDefault();
@@ -23,17 +25,24 @@ export const SignUp = () => {
       email,
       password,
     };
+    try {
+      let res = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
 
-    let res = await fetch("http://localhost:5000/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-
-      body: JSON.stringify(userData),
-    });
-    let resDatas = await res.json();
-    setResData(resDatas);
-    setUserName(resDatas);
+        body: JSON.stringify(userData),
+      });
+      let resDatas = await res.json();
+      setResData(resDatas);
+      setUserName(resDatas);
+    } catch (err) {
+      if (err === 11000) {
+        console.log(err);
+        setResData("user already exists");
+        navigate("/signup", { replace: true });
+      }
+    }
   }
 
   return (
