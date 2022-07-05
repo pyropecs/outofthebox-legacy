@@ -4,21 +4,16 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { SignUpRoute } from "./signUp";
 import { CreateComponent } from "../components/Create";
-import { nameContext } from "../context";
+import { NameProvider } from "../context/context";
 const index = () => {
-  const [UserName, setUserName] = useState("");
-
   return (
-    <nameContext.Provider value={{ UserName, setUserName }}>
+    <NameProvider>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="signup" element={<SignUpRoute />} />
-        <Route
-          path="create"
-          element={<CreateComponent nameContext={nameContext} />}
-        />
+        <Route path="create" element={<CreateComponent />} />
       </Routes>
-    </nameContext.Provider>
+    </NameProvider>
   );
 };
 

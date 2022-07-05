@@ -1,25 +1,34 @@
-import { useEffect } from "react";
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "./form";
-import validator from "validator";
-import { nameContext } from "../../context";
-
+import { useName } from "../../context/context";
+import { useLocation } from "react-router-dom";
 export const SignUp = () => {
   let navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resData, setResData] = useState("");
-  const { setUserName } = useContext(nameContext);
+  const { register } = useName();
+  let location = useLocation(); //i didnt yet used it
+
+  useEffect(() => {
+    function revertToSignIn() {
+      setResData("user already exists");
+      navigate("/signup", { replace: true });
+    }
+  }, [location]);
+
   if (resData) {
     console.log(resData);
     navigate("/create", { replace: true });
   }
-  useEffect(() => {}, [resData]);
 
+  console.log("aplle", location);
   async function SubmitDataHandler(e) {
     e.preventDefault();
+
+    console.log(location);
     const userData = {
       name,
       email,
@@ -35,12 +44,9 @@ export const SignUp = () => {
       });
       let resDatas = await res.json();
       setResData(resDatas);
-      setUserName(resDatas);
+      register(resDatas);
     } catch (err) {
       if (err === 11000) {
-        console.log(err);
-        setResData("user already exists");
-        navigate("/signup", { replace: true });
       }
     }
   }
