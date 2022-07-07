@@ -1,9 +1,8 @@
 // const userConnection = require("../db/config");
-const { Schema, createConnection } = require("mongoose");
+const { Schema } = require("mongoose");
 const dotenv = require("dotenv").config();
 const { isEmail } = require("validator");
-
-const userConnection = createConnection(process.env.MONGODB1_URI);
+const { connect } = require("../controllers/connect");
 const bcrypt = require("bcrypt");
 const userSchema = new Schema(
   {
@@ -35,9 +34,12 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
-
-const user = userConnection.model("user", userSchema);
+async function userModel() {
+  const { userConnection } = await connect();
+  const user = userConnection.model("user", userSchema);
+  return user;
+}
 
 module.exports = {
-  user,
+  userModel,
 };

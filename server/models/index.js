@@ -1,8 +1,9 @@
-const { blog } = require("./blogModels");
-const { user } = require("./userModels");
+const { blog, blogModel } = require("./blogModels");
+const { userModel } = require("./userModels");
+
 const dotenv = require("dotenv").config();
 
 module.exports = {
-  user,
-  blog,
+  userModel,
+  blogModel,
 };

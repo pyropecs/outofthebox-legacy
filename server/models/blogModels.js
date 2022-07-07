@@ -1,6 +1,7 @@
 // we need to create schema
 
-const { Schema, createConnection } = require("mongoose");
+const { Schema } = require("mongoose");
+const { connect } = require("../controllers/connect");
 const dotenv = require("dotenv").config();
 const blogSchema = new Schema(
   {
@@ -19,12 +20,12 @@ const blogSchema = new Schema(
   },
   { timestamps: true }
 );
-
-const blogConnection = createConnection(process.env.MONGODB2_URI, (ss) =>
-  console.log(ss)
-);
-const blog = blogConnection.model("blog", blogSchema);
+async function blogModel() {
+  const { CreateConnection } = await connect();
+  const blog = CreateConnection.model("blog", blogSchema);
+  return blog;
+}
 
 module.exports = {
-  blog,
+  blogModel,
 };
