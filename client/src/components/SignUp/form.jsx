@@ -1,6 +1,12 @@
 import React from "react";
 
-export const Form = ({ SubmitDataHandler, setEmail, setName, setPassword }) => {
+export const Form = ({
+  SubmitDataHandler,
+  setEmail,
+  setName,
+  setPassword,
+  UserExist,
+}) => {
   return (
     <form
       className="mb-4"
@@ -42,9 +48,15 @@ export const Form = ({ SubmitDataHandler, setEmail, setName, setPassword }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded">
+      <button className="bg-green-500 hover:bg-green-700  text-white uppercase text-sm font-semibold px-4 py-2 rounded">
         SignUp
       </button>
+
+      {UserExist ? (
+        <div className="text-red-600 pt-3 text-sm ">user already exists</div>
+      ) : (
+        ""
+      )}
     </form>
   );
 };

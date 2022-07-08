@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "./form";
-import { useName } from "../../context/context";
+import { useAuth, useName } from "../../context/context";
 import { useLocation } from "react-router-dom";
 export const SignUp = () => {
   let navigate = useNavigate();
@@ -9,44 +9,38 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resData, setResData] = useState("");
+
   const { register } = useName();
-  let location = useLocation(); //i didnt yet used it
+  //i didnt yet used it
 
-  useEffect(() => {
-    function revertToSignIn() {
-      setResData("user already exists");
-      navigate("/signup", { replace: true });
-    }
-  }, [location]);
+  const { Auth, setAuth, login } = useAuth();
 
-  if (resData) {
-    console.log(resData);
-    navigate("/create", { replace: true });
-  }
-
-  console.log("aplle", location);
   async function SubmitDataHandler(e) {
     e.preventDefault();
 
-    console.log(location);
     const userData = {
       name,
       email,
       password,
     };
-    try {
-      let res = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify(userData),
-      });
-      let resDatas = await res.json();
-      setResData(resDatas);
+    let res = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify(userData),
+    });
+    let resDatas = await res.json();
+    setResData(resDatas);
+
+    if (resData == 11000) {
+      console.log(Auth, "ddsdsdss");
+    } else {
       register(resDatas);
-    } catch (err) {
-      if (err === 11000) {
+      if (!UserExist) {
+        console.log("ssssss", UserExist);
+        login(Auth);
       }
     }
   }
@@ -63,6 +57,7 @@ export const SignUp = () => {
             setName={setName}
             setEmail={setEmail}
             setPassword={setPassword}
+            UserExist={UserExist}
           />
         </div>
       </div>

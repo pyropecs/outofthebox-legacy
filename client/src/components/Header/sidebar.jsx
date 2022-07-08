@@ -26,7 +26,7 @@ const sidebar = () => {
         <li className=" block w-full  transition-all transform duration-300 hover:bg-green-300 hover:pl-8 h-20 pl-3 pt-5 pb-5">
           <a href="" className="flex  transition transform  ">
             <GiStrong color="#34B3F1" size={28} />{" "}
-            <p className="pl-6">true stories</p>
+            <p className="pl-6">Real incident</p>
           </a>
         </li>
 

@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
 app.use(userRoute);
-app.use(createRoute);
+// app.use(createRoute);
 app.get("/", homePage);
 
 app.listen(5000);

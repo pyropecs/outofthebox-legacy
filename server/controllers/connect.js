@@ -1,4 +1,6 @@
 const { createConnection } = require("mongoose");
+const dotenv = require("dotenv").config();
+
 async function connect() {
   let userConnection = {};
   let CreateConnection = {};
