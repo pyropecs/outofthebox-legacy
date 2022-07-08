@@ -14,7 +14,7 @@ const { urlencoded } = require("express");
 const userRoute = require("./routes/userRoute");
 const createRoute = require("./routes/createRoute");
 const { connect } = require("./controllers/connect");
-connect();
+// connect();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

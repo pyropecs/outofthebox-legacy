@@ -1,11 +1,12 @@
-const { blog } = require("../models");
+const { blogModel } = require("../models");
 
 const homePage = async (req, res) => {
-  const blogs = await blog.find({});
+  const blogModels = await blogModel();
+  const blogs = await blogModels.find({});
+  console.log(blogs);
   res.json(blogs);
 };
 
 module.exports = {
   homePage,
-
 };
