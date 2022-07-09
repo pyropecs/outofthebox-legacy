@@ -4,8 +4,8 @@ export const Form = ({
   SubmitDataHandler,
   setEmail,
   setName,
+  Error,
   setPassword,
-  UserExist,
 }) => {
   return (
     <form
@@ -15,7 +15,10 @@ export const Form = ({
       method="post"
     >
       <div className="mb-4 md:w-full">
-        <label className="block text-xs mb-1">Full name</label>
+        <label className="block text-xs mb-1">
+          UserName
+          <span className="text-red-600 "> *unique and no spaces</span>
+        </label>
         <input
           className="w-full border rounded p-2 outline-none focus:shadow-outline"
           type="text"
@@ -52,11 +55,7 @@ export const Form = ({
         SignUp
       </button>
 
-      {UserExist ? (
-        <div className="text-red-600 pt-3 text-sm ">user already exists</div>
-      ) : (
-        ""
-      )}
+      {Error ? <div className="text-red-600 pt-3 text-sm ">{Error}</div> : ""}
     </form>
   );
 };

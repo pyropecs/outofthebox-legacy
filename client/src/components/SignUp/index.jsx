@@ -9,11 +9,12 @@ export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resData, setResData] = useState("");
+  const [Error, setError] = useState({});
 
   const { register } = useName();
   //i didnt yet used it
 
-  const { Auth, setAuth, login } = useAuth();
+  const { Auth, setAuth, UserExist, setUserExist, login } = useAuth();
 
   async function SubmitDataHandler(e) {
     e.preventDefault();
@@ -23,28 +24,29 @@ export const SignUp = () => {
       email,
       password,
     };
+    try {
+      let res = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
 
-    let res = await fetch("http://localhost:5000/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-
-      body: JSON.stringify(userData),
-    });
-    let resDatas = await res.json();
-    setResData(resDatas);
-
-    if (resData == 11000) {
-      console.log(Auth, "ddsdsdss");
-    } else {
-      register(resDatas);
-      if (!UserExist) {
-        console.log("ssssss", UserExist);
-        login(Auth);
-      }
+        body: JSON.stringify(userData),
+      });
+      let resDatas = await res.json();
+      setResData(resDatas);
+      ResData(resDatas);
+    } catch (err) {
+      console.log(err);
     }
   }
 
+  function ResData(resDatas) {
+    if (typeof resDatas === "string") {
+      setError(resDatas);
+    } else {
+      setResData(resDatas);
+    }
+  }
   return (
     <>
       <div className="flex items-center h-4/5 w-full">

@@ -1,7 +1,6 @@
-// const userConnection = require("../db/config");
 const { Schema } = require("mongoose");
 const dotenv = require("dotenv").config();
-const { isEmail } = require("validator");
+const { isEmail, isAlphanumeric } = require("validator");
 const { connect } = require("../controllers/connect");
 const bcrypt = require("bcrypt");
 const userSchema = new Schema(
@@ -9,6 +8,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: [true, "please enter a name"],
+      validate: [isAlphanumeric, "please don't include spaces and symbols"],
     },
     email: {
       type: String,
