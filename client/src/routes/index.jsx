@@ -14,14 +14,9 @@ const RouteCompo = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="signup" element={<SignUpRoute />} />
-          <Route
-            path="create"
-            element={
-              <ProtectedRoute>
-                <CreateComponent />
-              </ProtectedRoute>
-            }
-          />
+          <Route element={<ProtectedRoute />}>
+            <Route path="create" element={<CreateComponent />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </NameProvider>

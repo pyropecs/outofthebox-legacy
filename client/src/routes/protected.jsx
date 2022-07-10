@@ -1,16 +1,16 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/context";
 
 const ProtectedRoute = ({ children }) => {
-  const { Auth, navigate } = useAuth();
-  console.log(Auth);
-  if (!Auth) {
-    console.log(Auth);
-    return navigate("/signup", { replace: true });
-  } else {
-    return Auth ? children : <Outlet />;
-  }
+  const { Auth, setAuth } = useAuth();
+
+  const location = useLocation();
+  return Auth.user ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/signup" state={{ from: location }} replace />
+  );
 };
 
 export default ProtectedRoute;

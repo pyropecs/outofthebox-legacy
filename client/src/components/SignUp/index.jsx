@@ -1,20 +1,24 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { Form } from "./form";
 import { useAuth, useName } from "../../context/context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 export const SignUp = () => {
-  let navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [resData, setResData] = useState("");
-  const [Error, setError] = useState({});
+  const [error, setError] = useState("");
+  const { Auth, setAuth } = useAuth();
 
   const { register } = useName();
-  //i didnt yet used it
+  let location = useLocation().state;
+  const navigate = useNavigate();
 
-  const { Auth, setAuth, UserExist, setUserExist, login } = useAuth();
+  useEffect(() => {
+    setAuth({ user: true });
+  }, []);
 
   async function SubmitDataHandler(e) {
     e.preventDefault();
@@ -34,17 +38,26 @@ export const SignUp = () => {
       });
       let resDatas = await res.json();
       setResData(resDatas);
+
       ResData(resDatas);
     } catch (err) {
       console.log(err);
     }
-  }
 
+    navigate(location.from.pathname, { replace: true });
+  }
   function ResData(resDatas) {
+    if (resDatas.code === 11000) {
+      setError("userName or email already exist");
+    }
+
     if (typeof resDatas === "string") {
       setError(resDatas);
     } else {
-      setResData(resDatas);
+      resDatas = {
+        user: resDatas,
+      };
+      setAuth(resDatas);
     }
   }
   return (
@@ -59,7 +72,7 @@ export const SignUp = () => {
             setName={setName}
             setEmail={setEmail}
             setPassword={setPassword}
-            UserExist={UserExist}
+            Error={error}
           />
         </div>
       </div>

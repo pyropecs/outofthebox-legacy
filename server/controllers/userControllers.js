@@ -25,7 +25,7 @@ const signUpController = async (req, res, next) => {
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ users });
   } catch (err) {
-    res.status(409).json(err.message);
+    res.status(409).json(err);
   }
 
   next();

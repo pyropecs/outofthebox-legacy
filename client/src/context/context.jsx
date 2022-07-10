@@ -24,7 +24,7 @@ export const useName = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [Auth, setAuth] = useState(false);
+  const [Auth, setAuth] = useState({});
 
   const navigate = useNavigate();
   const [UserExist, setUserExist] = useState(false);
@@ -36,13 +36,19 @@ export function AuthProvider({ children }) {
       navigate("/create", { replace: true });
     }
   };
-  const logout = () => {
-    setAuth(false);
-  };
+  const logout = () => {};
 
   return (
     <authContext.Provider
-      value={{ Auth, login, logout, navigate, UserExist, setUserExist }}
+      value={{
+        Auth,
+        setAuth,
+        login,
+        logout,
+        navigate,
+        UserExist,
+        setUserExist,
+      }}
     >
       {children}
     </authContext.Provider>

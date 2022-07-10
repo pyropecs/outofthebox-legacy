@@ -55,7 +55,11 @@ export const Form = ({
         SignUp
       </button>
 
-      {Error ? <div className="text-red-600 pt-3 text-sm ">{Error}</div> : ""}
+      {Error ? (
+        <div className="text-red-600 pt-3 text-sm ">{`${Error}`}</div>
+      ) : (
+        ""
+      )}
     </form>
   );
 };

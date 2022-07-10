@@ -31,7 +31,7 @@ const sidebar = () => {
         </li>
 
         <li className=" block w-full  transition-all transform duration-300 hover:bg-green-300 hover:pl-8 h-20 pl-3 pt-5 pb-5">
-          <Link to="/signup" className="flex  transition transform  ">
+          <Link to="/create" className="flex  transition transform  ">
             <FaPenFancy color="#7D1E6A" size={28} />{" "}
             <p className="pl-6">become a story writer</p>
           </Link>
