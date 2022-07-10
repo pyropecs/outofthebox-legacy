@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "../Header/categories";
+import ImageUpload from "./ImageUpload";
 
 const BlogForm = () => {
   const catgories = [
@@ -57,33 +57,8 @@ const BlogForm = () => {
               </div>
             </div>
           </div>
-          <div className="mb-4">
-            <label className="block">
-              <input className="mr-2 leading-tight" type="checkbox" />
-              <span className="text-sm">I agree this</span>
-            </label>
-          </div>
-          <div className="mb-4">
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio"
-                name="accountType"
-                value="1"
-              />
-              <span className="ml-2">Yes</span>
-            </label>
-            <label className="inline-flex items-center ml-6">
-              <input
-                type="radio"
-                className="form-radio"
-                name="accountType"
-                value="2"
-              />
-              <span className="ml-2">No</span>
-            </label>
-          </div>
-          <div className="mb-4">
+          <ImageUpload />
+          <div className="mb-4 pt-3">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Message
               <textarea
