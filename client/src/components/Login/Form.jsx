@@ -1,26 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Form = ({
-  SubmitDataHandler,
-  setEmail,
-  setName,
-  Error,
-  setPassword,
-}) => {
+export const Form = ({ Error }) => {
   return (
     <>
-      <form
-        className="mb-4"
-        action="/signup"
-        onSubmit={SubmitDataHandler}
-        method="post"
-      >
+      <form className="mb-4" action="/login" method="post">
         <div className="mb-4 md:w-full">
-          <label className="block text-xs mb-1">
-            UserName
-            <span className="text-red-600 "> *unique and no spaces</span>
-          </label>
+          <label className="block text-xs mb-1">UserName</label>
           <input
             className="w-full border rounded p-2 outline-none focus:shadow-outline"
             type="text"
@@ -30,18 +16,6 @@ export const Form = ({
           />
         </div>
 
-        <div className="mb-4 md:w-full">
-          <label className="block text-xs mb-1">Username or Email</label>
-
-          <input
-            className="w-full border rounded p-2 outline-none focus:shadow-outline"
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
         <div className="mb-6 md:w-full">
           <label className="block text-xs mb-1">Password</label>
           <input
@@ -64,10 +38,9 @@ export const Form = ({
         )}
       </form>
       <div className="pt-2 text-sm">
-        have an account?
+        Doesn't have an account{" "}
         <div className="text-blue-600 underline inline">
-          {" "}
-          <Link to="login">Log in</Link>
+          <Link to="signup">Sign Up</Link>
         </div>
       </div>
     </>

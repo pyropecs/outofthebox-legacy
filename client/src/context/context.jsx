@@ -25,7 +25,7 @@ export const useName = () => {
 
 export function AuthProvider({ children }) {
   const [Auth, setAuth] = useState({});
-
+  const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [UserExist, setUserExist] = useState(false);
   const login = (userExist) => {
@@ -42,6 +42,8 @@ export function AuthProvider({ children }) {
     <authContext.Provider
       value={{
         Auth,
+        Loading,
+        setLoading,
         setAuth,
         login,
         logout,
