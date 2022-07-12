@@ -24,7 +24,7 @@ export const useName = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [Auth, setAuth] = useState({});
+  const [Auth, setAuth] = useState({ user: true });
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [UserExist, setUserExist] = useState(false);

@@ -18,11 +18,14 @@ export const SignUp = () => {
 
   useEffect(() => {
     setAuth({ user: true });
+    setLoading(false);
+    if (resData) {
+      setLoading(false);
+    }
   }, []);
 
   async function SubmitDataHandler(e) {
     e.preventDefault();
-
     const userData = {
       name,
       email,
@@ -39,17 +42,17 @@ export const SignUp = () => {
       }).catch(() => {
         setLoading(false);
 
-        setAuth({ user: false });
+        setAuth({ user: true });
       });
       let resDatas = await res.json();
-      setResData(resDatas);
 
+      setResData(resDatas);
+      console.log(location.from.pathname);
+      navigate(location.from.pathname, { replace: true });
       ResData(resDatas);
     } catch (err) {
       console.log(err);
     }
-
-    navigate(location.from.pathname, { replace: true });
   }
   function ResData(resDatas) {
     if (resDatas.code === 11000) {

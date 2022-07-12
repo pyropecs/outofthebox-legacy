@@ -67,7 +67,9 @@ export const Form = ({
         have an account?
         <div className="text-blue-600 underline inline">
           {" "}
-          <Link to="login">Log in</Link>
+          <Link to="/" replace>
+            Log in
+          </Link>
         </div>
       </div>
     </>

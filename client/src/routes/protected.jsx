@@ -1,11 +1,16 @@
 import React from "react";
+import { useEffect } from "react";
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/context";
 
 const ProtectedRoute = ({ children }) => {
   const { Auth, setAuth } = useAuth();
+  useEffect(() => {
+    setAuth({ user: true });
+  }, []);
 
   const location = useLocation();
+
   return Auth.user ? (
     <Outlet />
   ) : (

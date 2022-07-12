@@ -3,13 +3,13 @@ import { GiSpanner } from "react-icons/gi";
 import { IoIosExit } from "react-icons/io";
 
 import { useState, useId } from "react";
-import { Link, useNavigate, useRoutes } from "react-router-dom";
+import { Link, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import { useAuth } from "../../context/context";
 import BlogForm from "./BlogForm";
 
 export const CreateComponent = () => {
-  const randomKey = useId();
   const { setAuth } = useAuth();
+
   const iconArray = [FaPlus, GiSpanner, IoIosExit];
   function logout() {
     setAuth({ user: false });
