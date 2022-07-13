@@ -12,12 +12,11 @@ export const SignUp = () => {
   const [error, setError] = useState("");
   const { setAuth, Loading, setLoading } = useAuth();
 
-  const { register } = useName();
+  const { setUserName } = useName();
   let location = useLocation().state;
   const navigate = useNavigate();
 
   useEffect(() => {
-    setAuth({ user: true });
     setLoading(false);
     if (resData) {
       setLoading(false);
@@ -42,7 +41,7 @@ export const SignUp = () => {
       }).catch(() => {
         setLoading(false);
 
-        setAuth({ user: true });
+        setAuth({ user: false });
       });
       let resDatas = await res.json();
 
@@ -68,6 +67,7 @@ export const SignUp = () => {
         user: resDatas,
       };
       setAuth(resDatas);
+      setUserName(name);
       setLoading(false);
     }
   }

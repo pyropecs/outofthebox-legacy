@@ -3,6 +3,7 @@ import ImageUpload from "./ImageUpload";
 
 import { useState } from "react";
 import { fetchAsync } from "../../utils/fetchPostBlog";
+import { useName } from "../../context/context";
 
 const BlogForm = ({}) => {
   const catgories = [
@@ -19,6 +20,7 @@ const BlogForm = ({}) => {
   const [SelectedFile, setSelectedFile] = useState("");
   const [Content, setContent] = useState("");
   const [Response, setResponse] = useState("");
+  const { UserName, success, setSuccess } = useName();
 
   async function submitDataHandler(e) {
     e.preventDefault();
@@ -27,15 +29,20 @@ const BlogForm = ({}) => {
       return;
     }
     const blog = {
+      name: UserName,
       title: Title,
       categories: Option,
       img: PreviewFile,
       content: Content,
     };
-
-    const resData = await fetchAsync(blog);
-    setResponse(resData);
-    console.log(Response);
+    try {
+      const resData = await fetchAsync(blog);
+      setResponse(resData);
+      setSuccess(true);
+    } catch (err) {
+      setResponse(err);
+      setSuccess(false);
+    }
   }
 
   return (
@@ -113,6 +120,11 @@ const BlogForm = ({}) => {
             >
               Submit
             </button>
+            {success ? (
+              <div className="text-red-600 pt-3 text-sm ">{`sucessfully submitted`}</div>
+            ) : (
+              ""
+            )}
           </div>
         </form>
       </div>

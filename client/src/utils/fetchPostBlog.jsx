@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export async function fetchAsync(data) {
   let res = await fetch("http://localhost:5000/create", {
     method: "POST",

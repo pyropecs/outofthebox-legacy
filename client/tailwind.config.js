@@ -6,7 +6,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
-        showcase: 'url("/public/showcase1.jpg")',
+        showcase: 'url("/showcase1.jpg")',
       },
     },
   },

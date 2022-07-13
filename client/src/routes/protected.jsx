@@ -5,9 +5,6 @@ import { useAuth } from "../context/context";
 
 const ProtectedRoute = ({ children }) => {
   const { Auth, setAuth } = useAuth();
-  useEffect(() => {
-    setAuth({ user: true });
-  }, []);
 
   const location = useLocation();
 

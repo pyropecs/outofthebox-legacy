@@ -6,6 +6,7 @@ const nameContext = createContext();
 const authContext = createContext();
 export function NameProvider({ children }) {
   const [UserName, setUserName] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const register = (UserName) => {
     if (UserName != 11000) {
@@ -13,7 +14,9 @@ export function NameProvider({ children }) {
     }
   };
   return (
-    <nameContext.Provider value={{ register, UserName }}>
+    <nameContext.Provider
+      value={{ register, UserName, setUserName, success, setSuccess }}
+    >
       {children}
     </nameContext.Provider>
   );
@@ -24,7 +27,7 @@ export const useName = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [Auth, setAuth] = useState({ user: true });
+  const [Auth, setAuth] = useState({ user: false });
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [UserExist, setUserExist] = useState(false);
