@@ -5,6 +5,9 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        showcase: 'url("/public/showcase1.jpg")',
+      },
     },
   },
   plugins: [],

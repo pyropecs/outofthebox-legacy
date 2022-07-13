@@ -27,10 +27,10 @@ const BlogForm = ({}) => {
       return;
     }
     const blog = {
-      Title,
-      Option,
-      PreviewFile,
-      Content,
+      title: Title,
+      categories: Option,
+      img: PreviewFile,
+      content: Content,
     };
 
     const resData = await fetchAsync(blog);

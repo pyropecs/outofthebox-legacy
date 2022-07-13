@@ -5,7 +5,10 @@ const { connect } = require("../controllers/connect");
 const dotenv = require("dotenv").config();
 const blogSchema = new Schema(
   {
-    name: {
+    title: {
+      type: String,
+    },
+    imgUrl: {
       type: String,
     },
     categories: {
@@ -13,6 +16,7 @@ const blogSchema = new Schema(
     },
     content: {
       type: String,
+      minlength: [30, "please elaborate your content"],
     },
   },
   { timestamps: true }
