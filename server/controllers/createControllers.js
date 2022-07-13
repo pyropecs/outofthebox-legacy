@@ -6,24 +6,25 @@ const CreateControllerPost = async (req, res, next) => {
   const Blog = await blogModel();
 
   try {
-    const { title, categories, img, content } = req.body;
+    const { name, title, categories, img, content } = req.body;
     const imgUploadRes = await cloudinary.uploader.upload(img, {
       upload_preset: "ecdduob0",
     });
     const imgUrl = await imgUploadRes.url;
     const blogRes = await {
+      name,
       title,
       categories,
       imgUrl,
       content,
     };
-    console.log(blogRes);
 
     const blogAdd = await Blog.create(blogRes);
-    console.log(blogAdd);
+
     res.send(blogAdd);
   } catch (err) {
     console.log(err);
+    res.json({ err });
   }
 
   //wait for cloudinary public api

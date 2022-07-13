@@ -14,6 +14,7 @@ const { urlencoded } = require("express");
 const userRoute = require("./routes/userRoute");
 const createRoute = require("./routes/createRoute");
 const { connect } = require("./controllers/connect");
+
 connect();
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));

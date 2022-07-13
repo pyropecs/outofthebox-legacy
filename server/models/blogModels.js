@@ -5,6 +5,9 @@ const { connect } = require("../controllers/connect");
 const dotenv = require("dotenv").config();
 const blogSchema = new Schema(
   {
+    name: {
+      type: String,
+    },
     title: {
       type: String,
     },
