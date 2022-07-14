@@ -9,7 +9,9 @@ const CreateControllerPost = async (req, res, next) => {
     const { name, title, categories, img, content } = req.body;
     const imgUploadRes = await cloudinary.uploader.upload(img, {
       upload_preset: "ecdduob0",
+      transformation: [{ height: 436, width: 436, crop: "fill" }],
     });
+
     const imgUrl = await imgUploadRes.url;
     const blogRes = await {
       name,

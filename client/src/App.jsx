@@ -2,6 +2,7 @@ import "./index.css";
 
 import Header from "./components/Header";
 import SectionContainer from "./components/Section";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Header />
 
       <SectionContainer />
+      <Footer />
     </>
   );
 }

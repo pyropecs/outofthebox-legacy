@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Compressor from "compressorjs";
 
 const ImageUpload = ({
   SelectedFile,
@@ -9,11 +10,18 @@ const ImageUpload = ({
 }) => {
   const [FileInputState, setFileInputState] = useState("");
 
-  function handleFileInput(e) {
+  async function handleFileInput(e) {
     e.preventDefault();
     const file = e.target.files[0];
-    previewFileFunc(file);
-    setSelectedFile(file);
+    new Compressor(file, {
+      quality: 0.6,
+      maxWidth: 436,
+      maxHeight: 436,
+      success(compressedImage) {
+        previewFileFunc(compressedImage);
+        setSelectedFile(compressedImage);
+      },
+    });
     setFileInputState(e.target.value);
   }
 

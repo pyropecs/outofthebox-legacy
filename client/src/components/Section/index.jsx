@@ -5,12 +5,42 @@ import { Link } from "react-router-dom";
 import { fetchGetAsync } from "../../utils/fetchGet";
 
 const SectionContainer = () => {
+  const categories = [
+    "True Stories",
+    "Your Life Superhuman",
+    "Fantasy",
+    "Real Incident",
+  ];
   const [Res, setRes] = useState("");
   const [Res2, setRes2] = useState("");
   async function getUsers() {
     const resData = await fetchGetAsync();
     setRes(resData[6]);
     setRes2(resData[7]);
+    const newImgUrl1 = imgOptimizer(resData[6].imgUrl);
+    setRes((prev) => {
+      return {
+        ...prev,
+        imgUrl: newImgUrl1,
+      };
+    });
+    const newImgUrl2 = imgOptimizer(resData[7].imgUrl);
+    setRes2((prev) => {
+      return {
+        ...prev,
+        imgUrl: newImgUrl2,
+      };
+    });
+    ///https://res.cloudinary.com/dvb6lx7rm/image/upload/c_scale,q_60,w_390/v1657691416/out_of_the_box/byrcaxsi2oxqjns3wpdv.jpg
+  }
+
+  function imgOptimizer(imgUrl) {
+    const urlArray = imgUrl.split("/");
+    urlArray.shift();
+    urlArray.splice(5, 0, "c_scale,q_60,w_390");
+    const newImgUrl = `https:/${urlArray.join("/")}`;
+
+    return newImgUrl;
   }
 
   useEffect(() => {
@@ -37,50 +67,6 @@ const SectionContainer = () => {
                 Sign Up
               </Link>
             </button>
-          </div>
-        </div>
-
-        <div class="mx-5 my-16 md:my-24 sm:grid grid-cols-2 gap-5 justify-items-center md:max-w-3xl md:mx-auto md:mt-24 md:mb-24">
-          <div class="text-center bg-white shadow-lg md:max-w-sm">
-            <div class="px-7 py-9">
-              <h2 class="font-bold text-lg mb-2 md:mb-4 md:text-3xl">
-                {Res.title}
-              </h2>
-              <p>{Res.name}</p>
-              <button
-                type="button"
-                class="bg-transparent border-gray-700 border-2 text-gray-800 font-bold uppercase py-2 px-7 mt-7 rounded-full inline-block sm:mt-8 text-xs tracking-wider hover:bg-gray-700 hover:text-white"
-              >
-                Read More
-              </button>
-            </div>
-
-            <img
-              src={Res.imgUrl}
-              alt="Spring collection"
-              class="h-56 object-cover w-full md:h-64 "
-            />
-          </div>
-
-          <div class="text-center bg-white shadow-lg md:max-w-sm">
-            <div class="px-7 py-9">
-              <h2 class="font-bold text-lg mb-2 md:mb-4 md:text-3xl">
-                {Res2.title}
-              </h2>
-              <p>{Res2.name}</p>
-              <button
-                type="button"
-                class="bg-transparent border-gray-700 border-2 text-gray-800 font-bold uppercase py-2 px-7 mt-7 rounded-full inline-block sm:mt-8 text-xs tracking-wider hover:bg-gray-700 hover:text-white"
-              >
-                purchase now
-              </button>
-            </div>
-
-            <img
-              src={Res2.imgUrl}
-              alt="blog post 2"
-              class="h-56 object-cover w-full md:h-64"
-            />
           </div>
         </div>
       </div>
