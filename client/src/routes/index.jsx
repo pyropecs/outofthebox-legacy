@@ -17,7 +17,7 @@ const RouteCompo = () => {
         <Routes>
           <Route path="*" element={<LoadingRoute />} />
           <Route path="/" element={<App />} />
-          <Route path=":categories" element={<Categories />} />
+          <Route path="/categories/:categories" element={<Categories />} />
           <Route path="signup" element={<SignUpRoute />} />
           <Route path="login" element={<LoginRoute />} />
 

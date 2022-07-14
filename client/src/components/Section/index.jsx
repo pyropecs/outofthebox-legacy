@@ -3,14 +3,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchGetAsync } from "../../utils/fetchGet";
+import Categories from "./catgories";
 
 const SectionContainer = () => {
-  const categories = [
-    "True Stories",
-    "Your Life Superhuman",
-    "Fantasy",
-    "Real Incident",
-  ];
   const [Res, setRes] = useState("");
   const [Res2, setRes2] = useState("");
   async function getUsers() {
@@ -69,6 +64,7 @@ const SectionContainer = () => {
             </button>
           </div>
         </div>
+        <Categories />
       </div>
     </>
   );

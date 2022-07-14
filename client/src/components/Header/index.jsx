@@ -7,7 +7,7 @@ export default function Header() {
   const [navToggle, setNavToggle] = useState(false);
 
   return (
-    <header className="bg-black h-20 w-full  text-stone-200   pt-2   border-solid border-b-2 border-b-stone-200">
+    <header className="bg-black h-20 w-full  text-stone-200   pt-2   ">
       <p></p>
       <div className=" absolute left-1/3 ">
         <a href="/" className="flex">
