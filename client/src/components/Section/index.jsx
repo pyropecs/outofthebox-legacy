@@ -2,46 +2,10 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { fetchGetAsync } from "../../utils/fetchGet";
+
 import Categories from "./catgories";
 
 const SectionContainer = () => {
-  const [Res, setRes] = useState("");
-  const [Res2, setRes2] = useState("");
-  async function getUsers() {
-    const resData = await fetchGetAsync();
-    setRes(resData[6]);
-    setRes2(resData[7]);
-    const newImgUrl1 = imgOptimizer(resData[6].imgUrl);
-    setRes((prev) => {
-      return {
-        ...prev,
-        imgUrl: newImgUrl1,
-      };
-    });
-    const newImgUrl2 = imgOptimizer(resData[7].imgUrl);
-    setRes2((prev) => {
-      return {
-        ...prev,
-        imgUrl: newImgUrl2,
-      };
-    });
-    ///https://res.cloudinary.com/dvb6lx7rm/image/upload/c_scale,q_60,w_390/v1657691416/out_of_the_box/byrcaxsi2oxqjns3wpdv.jpg
-  }
-
-  function imgOptimizer(imgUrl) {
-    const urlArray = imgUrl.split("/");
-    urlArray.shift();
-    urlArray.splice(5, 0, "c_scale,q_60,w_390");
-    const newImgUrl = `https:/${urlArray.join("/")}`;
-
-    return newImgUrl;
-  }
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
   return (
     <>
       <div class="bg-gray-100  font-poppins leading-normal tracking-normal">

@@ -1,26 +1,13 @@
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import {
+  categories,
+  Content,
+  CateGoriesRoute,
+} from "../../fixtures/categoriesArray";
 
 const Categories = () => {
-  const categories = [
-    "True Stories",
-    "Your Life Superhuman",
-    "Fantasy",
-    "Real Incident",
-  ];
-
-  const CateGoriesRoute = categories.map((elem, index) => {
-    const route = elem.toLowerCase().split(" ").join("+");
-
-    return route;
-  });
-  const Content = [
-    "share your inspiring real stories to the world",
-    "the person who changed your life share to us",
-    "the thoughts or your fantasy story share to the world",
-    "real incident that happened that in your life",
-  ];
   return (
     <>
       {categories.map((category, index) => {
@@ -46,6 +33,7 @@ const Categories = () => {
                   <Link
                     to={`/categories/${CateGoriesRoute[index]}`}
                     className="bg-green-500 text-white pl-6 rounded-full  shadow-lg flex items-center"
+                    state={CateGoriesRoute[index]}
                   >
                     <span className="mr-2 text-base">Read More</span>{" "}
                     <span className="bg-green-600 hover:bg-green-800 w-16 h-16  flex items-center justify-center rounded-full ">

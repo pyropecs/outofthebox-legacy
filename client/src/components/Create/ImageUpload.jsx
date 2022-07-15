@@ -15,8 +15,8 @@ const ImageUpload = ({
     const file = e.target.files[0];
     new Compressor(file, {
       quality: 0.6,
-      maxWidth: 436,
-      maxHeight: 436,
+      maxWidth: 640,
+      maxHeight: 640,
       success(compressedImage) {
         previewFileFunc(compressedImage);
         setSelectedFile(compressedImage);

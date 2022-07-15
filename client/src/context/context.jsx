@@ -7,7 +7,8 @@ const authContext = createContext();
 export function NameProvider({ children }) {
   const [UserName, setUserName] = useState("");
   const [success, setSuccess] = useState(false);
-
+  const [CurrentRoute, setCurrentRoute] = useState("");
+  const [ClickedBlog, setClickedBlog] = useState({});
   const register = (UserName) => {
     if (UserName != 11000) {
       setUserName(UserName);
@@ -15,7 +16,17 @@ export function NameProvider({ children }) {
   };
   return (
     <nameContext.Provider
-      value={{ register, UserName, setUserName, success, setSuccess }}
+      value={{
+        ClickedBlog,
+        setClickedBlog,
+        register,
+        CurrentRoute,
+        setCurrentRoute,
+        UserName,
+        setUserName,
+        success,
+        setSuccess,
+      }}
     >
       {children}
     </nameContext.Provider>

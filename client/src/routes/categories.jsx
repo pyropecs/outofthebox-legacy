@@ -1,16 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Categories from "../components/Categories";
 
-const Categories = () => {
+const CategoriesRoute = () => {
   let route = useParams();
-
-  console.log(route);
 
   return (
     <>
-      <div className="font-poppins text-lg">{route.categories}</div>
+      <div className="font-poppins text-lg">
+        <Categories route={route.categories} />
+      </div>
     </>
   );
 };
 
-export default Categories;
+export default CategoriesRoute;
