@@ -3,6 +3,10 @@ import { useName } from "../../context/context";
 import { FcClock } from "react-icons/fc";
 const BlogPage = () => {
   const { ClickedBlog } = useName();
+  const date2 = new Date(ClickedBlog.updatedAt);
+
+  const year = date2.getFullYear();
+  const month = date2.getUTCMonth() + 1;
 
   return (
     <div className="relative">
@@ -24,7 +28,7 @@ const BlogPage = () => {
         <div className="py-5 text-sm font-regular text-gray-900 flex items-center justify-center">
           <span className="mr-3  flex flex-row items-center">
             <FcClock />
-            <span className="ml-1 hover:text-indigo-600">6 mins ago</span>
+            <span className="ml-1 hover:text-indigo-600">{`${month} ${year}`}</span>
           </span>
           <a
             href="#"
