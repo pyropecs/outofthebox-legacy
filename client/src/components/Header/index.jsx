@@ -8,7 +8,6 @@ export default function Header() {
 
   return (
     <header className="bg-black h-20 w-full  text-stone-200   pt-2   ">
-      <p></p>
       <div className=" absolute left-1/3 ">
         <a href="/" className="flex">
           <h1 className="font-sans font-semibold max-w-full pt-5 text-2xl pl-4 pr-3 border-solid border-r-2 border-b-stone-200 tracking-wide">
@@ -23,7 +22,7 @@ export default function Header() {
       </div>
 
       <nav
-        className=" absolute  right-0  text-lg transition ease-in duration-300 transform  "
+        className=" absolute  right-0  text-lg transition ease-in duration-300   "
         onClick={() => setNavToggle(!navToggle)}
       >
         {navToggle ? <SideBarToggle /> : <Categories />}

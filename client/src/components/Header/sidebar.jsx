@@ -6,7 +6,7 @@ import { CateGoriesRoute } from "../../fixtures/categoriesArray";
 console.log(CateGoriesRoute);
 const sidebar = () => {
   return (
-    <div className=" transition duration-300  transform bg-white h-full  fixed w-72 top-20 right-0 text-black ">
+    <div className=" transform transition-all duration-300  bg-white h-full  fixed w-72 top-0 right-0 text-black ">
       <ul className="font-bold capitalize   pb-6  text-lg">
         <li className=" block w-full  transition-all transform duration-300 hover:bg-green-300 hover:pl-10 h-20 pl-3 pt-5 pb-5">
           <Link to={`/categories/${CateGoriesRoute[0]}`} className="flex ">
