@@ -1,8 +1,8 @@
 // signIncontroller
 const { userModel } = require("../models");
 const jwt = require("jsonwebtoken");
-const { compareSync } = require("bcrypt");
-const dotenv = require("dotenv").config();
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const maxAge = 3 * 24 * 60 * 60;
 
@@ -24,7 +24,7 @@ const signUpController = async (req, res, next) => {
     //token
     const token = createToken(users._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ users });
+    res.status(201).json({ user: users });
   } catch (err) {
     console.log(err);
     res.status(409).json(err);
@@ -35,10 +35,46 @@ const signUpController = async (req, res, next) => {
 
 //login_post
 const loginController = async (req, res, next) => {
-  const { email, password } = req.body;
-  const users = await user.login();
+  try {
+    // Get user input
+    const { name, password } = req.body;
+
+    // Validate user input
+    if (!(name && password)) {
+      res.status(400).send("All input is required");
+    }
+    const users = await userModel();
+    // Validate if user exist in our database
+    const user = await users.findOne({ name });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Create token
+      const token = jwt.sign(
+        { user_id: user._id, name },
+        process.env.TOKEN_SECRET,
+        {
+          expiresIn: maxAge * 1000,
+        }
+      );
+
+      // save user token
+      res.cookie = token;
+
+      const user1 = {
+        _id: user._id,
+        name: user.name,
+      };
+      // user
+      res.status(200).json({ user: user1 });
+    } else {
+      res.status(400).json("Invalid Credentials");
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 module.exports = {
   signUpController,
+  loginController,
 };

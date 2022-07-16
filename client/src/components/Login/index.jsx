@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useAuth } from "../../context/context";
 import { Form } from "./Form";
 
 const Login = () => {
-  const [Error, setError] = useState("");
+  const { Error, setError } = useAuth();
+
   return (
     <>
       <div className="flex items-center h-4/5 w-full">
@@ -11,7 +13,7 @@ const Login = () => {
           <span className="block w-full text-xl uppercase font-bold mb-4">
             Log In
           </span>
-          <Form Error={Error} />
+          <Form Error={Error} setError={setError} />
         </div>
       </div>
     </>

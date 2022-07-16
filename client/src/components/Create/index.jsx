@@ -40,7 +40,7 @@ export const CreateComponent = () => {
                 );
               } else {
                 return (
-                  <Link to="/signup" id={index}>
+                  <Link to="/login" id={index}>
                     <div
                       onClick={logout}
                       className=" text-lg  h-20 w-16 pt-2  pb-2 m-auto transition-all hover:animate-pulse visited::text-green-200 "

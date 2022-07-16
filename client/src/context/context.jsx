@@ -6,7 +6,7 @@ const nameContext = createContext();
 const authContext = createContext();
 export function NameProvider({ children }) {
   const [UserName, setUserName] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState("");
   const [CurrentRoute, setCurrentRoute] = useState("");
   const [ClickedBlog, setClickedBlog] = useState({});
   const register = (UserName) => {
@@ -41,16 +41,7 @@ export function AuthProvider({ children }) {
   const [Auth, setAuth] = useState({ user: false });
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [UserExist, setUserExist] = useState(false);
-  const login = (userExist) => {
-    setAuth(true);
-    if (userExist) {
-      return;
-    } else {
-      navigate("/create", { replace: true });
-    }
-  };
-  const logout = () => {};
+  const [Error, setError] = useState("");
 
   return (
     <authContext.Provider
@@ -59,11 +50,10 @@ export function AuthProvider({ children }) {
         Loading,
         setLoading,
         setAuth,
-        login,
-        logout,
+        Error,
+        setError,
+
         navigate,
-        UserExist,
-        setUserExist,
       }}
     >
       {children}

@@ -1,8 +1,8 @@
 const { Router } = require("express");
+const { loginController } = require("../controllers/userControllers");
 const router = Router();
+const verifyToken = require("../middleware/authMiddleWare");
 
-function loginController(rea, res, next) {
-  //authenticate the existing acct which is in db
-}
+router.post("/login", verifyToken, loginController);
 
-router.get("/login", loginController);
+module.exports = router;

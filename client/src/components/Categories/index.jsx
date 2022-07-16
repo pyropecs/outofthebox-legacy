@@ -32,7 +32,11 @@ const Categories = ({ route }) => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+
+    return () => {
+      ResData;
+    };
+  }, [route]);
 
   return (
     <>

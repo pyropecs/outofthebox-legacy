@@ -26,6 +26,7 @@ const BlogForm = ({}) => {
     e.preventDefault();
 
     if (!Title || !Option || !PreviewFile) {
+      setSuccess("dont make it empty please fill the form!! ");
       return;
     }
     const blog = {
@@ -38,7 +39,7 @@ const BlogForm = ({}) => {
     try {
       const resData = await fetchAsync(blog);
       setResponse(resData);
-      setSuccess(true);
+      setSuccess("sucessfully submitted");
     } catch (err) {
       setResponse(err);
       setSuccess(false);
@@ -121,7 +122,7 @@ const BlogForm = ({}) => {
               Submit
             </button>
             {success ? (
-              <div className="text-red-600 pt-3 text-sm ">{`sucessfully submitted`}</div>
+              <div className="text-red-600 pt-3 text-sm ">{sucesss}</div>
             ) : (
               ""
             )}

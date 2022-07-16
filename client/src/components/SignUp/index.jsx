@@ -18,9 +18,6 @@ export const SignUp = () => {
 
   useEffect(() => {
     setLoading(false);
-    if (resData) {
-      setLoading(false);
-    }
   }, []);
 
   async function SubmitDataHandler(e) {
@@ -46,29 +43,29 @@ export const SignUp = () => {
       let resDatas = await res.json();
 
       setResData(resDatas);
-      console.log(location.from.pathname);
-      navigate(location.from.pathname, { replace: true });
+
       ResData(resDatas);
     } catch (err) {
       console.log(err);
+      navigate("/signup");
     }
   }
   function ResData(resDatas) {
     if (resDatas.code === 11000) {
       setError("userName or email already exist");
       setLoading(false);
+      navigate("/signup");
     }
 
     if (typeof resDatas === "string") {
       setError(resDatas);
       setLoading(false);
+      navigate("/signup");
     } else {
-      resDatas = {
-        user: resDatas,
-      };
       setAuth(resDatas);
       setUserName(name);
       setLoading(false);
+      navigate("/create");
     }
   }
   if (Loading) {
