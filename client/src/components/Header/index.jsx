@@ -22,7 +22,7 @@ export default function Header() {
           <img
             src="/brainstorm.png"
             alt="mo img"
-            className="p-3   w-16  transition ease-out object-cover hover:animate-bounce"
+            className="p-3 hidden md:block  w-16  transition ease-out object-cover hover:animate-bounce"
           />
         </Link>
       </div>

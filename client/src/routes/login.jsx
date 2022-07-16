@@ -6,9 +6,11 @@ import LoadingRoute from "./loading";
 
 const LoginRoute = () => {
   const { Loading } = useAuth();
-
+  const color = Loading ? "bg-white" : "bg-gray-300";
   return (
-    <div className="antialiased bg-gray-300 h-screen w-full text-gray-900 font-sans">
+    <div
+      className={`antialiased ${color} h-screen w-full text-gray-900 font-sans`}
+    >
       <Header />
       {Loading ? <LoadingRoute /> : <Login />}
     </div>

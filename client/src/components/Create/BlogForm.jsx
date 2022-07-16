@@ -3,7 +3,8 @@ import ImageUpload from "./ImageUpload";
 
 import { useState } from "react";
 import { fetchAsync } from "../../utils/fetchPostBlog";
-import { useName } from "../../context/context";
+import { useAuth, useName } from "../../context/context";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const BlogForm = ({}) => {
   const catgories = [
@@ -21,12 +22,15 @@ const BlogForm = ({}) => {
   const [Content, setContent] = useState("");
   const [Response, setResponse] = useState("");
   const { UserName, success, setSuccess } = useName();
-
+  const { setLoading } = useAuth();
+  const navigate = useNavigate();
   async function submitDataHandler(e) {
     e.preventDefault();
-
-    if (!Title || !Option || !PreviewFile) {
+    setLoading(true);
+    if (!Title && !Option && !PreviewFile) {
       setSuccess("dont make it empty please fill the form!! ");
+      setLoading(false);
+      navigate("/create", { replace: true });
       return;
     }
     const blog = {
@@ -38,16 +42,31 @@ const BlogForm = ({}) => {
     };
     try {
       const resData = await fetchAsync(blog);
-      setResponse(resData);
-      setSuccess("sucessfully submitted");
+
+      validateResData(resData);
+      navigate("/create", { replace: true });
     } catch (err) {
+      console.log(err);
       setResponse(err);
-      setSuccess(false);
+      setSuccess("submission failed");
+      setLoading(false);
+      navigate("/create", { replace: true });
+    }
+  }
+  function validateResData(resData) {
+    if (resData.err) {
+      setLoading(false);
+      const errMsg = resData.err.message;
+      setSuccess(errMsg);
+    } else {
+      setResponse(resData);
+      setLoading(false);
+      setSuccess("sucessfully submitted");
     }
   }
 
   return (
-    <section classNameName="h-full w-33">
+    <section className="h-full w-33">
       <div className="max-w-screen-md mx-auto md:w-screen p-5">
         <div className="text-center mb-16">
           <h3 className="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
@@ -114,18 +133,18 @@ const BlogForm = ({}) => {
               ></textarea>
             </label>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col  items-center justify-between">
+            {success ? (
+              <div className="text-red-600 pb-1 text-sm ">{success}</div>
+            ) : (
+              ""
+            )}
             <button
               className="bg-green-500 m-auto  hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
               type="submit"
             >
               Submit
             </button>
-            {success ? (
-              <div className="text-red-600 pt-3 text-sm ">{sucesss}</div>
-            ) : (
-              ""
-            )}
           </div>
         </form>
       </div>

@@ -62,6 +62,7 @@ export const SignUp = () => {
       setLoading(false);
       navigate("/signup");
     } else {
+      localStorage.setItem("user", resDatas);
       setAuth(resDatas);
       setUserName(name);
       setLoading(false);

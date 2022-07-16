@@ -5,7 +5,7 @@ import Header from "../Header";
 const BlogPage = () => {
   const { ClickedBlog } = useName();
   const date2 = new Date(ClickedBlog.updatedAt);
-
+  console.log(ClickedBlog);
   const year = date2.getFullYear();
   const month = date2.getUTCMonth() + 1;
 

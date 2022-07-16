@@ -1,4 +1,4 @@
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaBars, FaTimes } from "react-icons/fa";
 import { GiSpanner } from "react-icons/gi";
 import { IoIosExit } from "react-icons/io";
 
@@ -6,20 +6,28 @@ import { useState, useId } from "react";
 import { Link, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import { useAuth } from "../../context/context";
 import BlogForm from "./BlogForm";
+import LoadingCompo from "../Loading";
 
 export const CreateComponent = () => {
-  const { setAuth } = useAuth();
-
+  const { setAuth, Loading } = useAuth();
+  const [BarClick, setBarClick] = useState(false);
   const iconArray = [FaPlus, GiSpanner, IoIosExit];
   function logout() {
+    localStorage.removeItem("user");
     setAuth({ user: false });
+  }
+
+  const display = BarClick ? "block" : "hidden";
+  function menuHandler() {
+    setBarClick((prev) => !prev);
   }
 
   return (
     <>
-      {/* <div className="">hi {exist ? UserName : "user already exist"}</div> */}
-      <div className="h-screen bg-white flex md:gap-24 ">
-        <header className="bg-black w-20 h-full  text-stone-200  font-semibold pt-2   border-solid border-b-2 border-b-stone-200">
+      <div className="h-screen  bg-white flex md:gap-24 ">
+        <header
+          className={`bg-black w-20 h-full ${display}   md:block text-stone-200  font-semibold pt-2   border-solid border-b-2 border-b-stone-200`}
+        >
           <ul className="flex flex-col ">
             <Link to="/" className="">
               <img
@@ -53,7 +61,13 @@ export const CreateComponent = () => {
             })}
           </ul>
         </header>
-        <BlogForm />
+        <div
+          className="block md:hidden h-20  w-auto cursor-pointer p-5"
+          onClick={menuHandler}
+        >
+          {BarClick ? <FaTimes size={30} /> : <FaBars size={30} />}
+        </div>
+        {Loading ? <LoadingCompo /> : <BlogForm />}
       </div>
     </>
   );

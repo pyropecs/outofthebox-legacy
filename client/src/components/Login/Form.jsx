@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchUserPostAsync } from "../../utils/fetchUserPost";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/context";
+import { useAuth, useName } from "../../context/context";
 
 export const Form = ({ Error, setError }) => {
   const [Name, setName] = useState("");
@@ -10,6 +10,7 @@ export const Form = ({ Error, setError }) => {
   const [Credentials, setCredentials] = useState({});
   let navigate = useNavigate();
   const { setAuth, setLoading } = useAuth();
+  const { setUserName } = useName();
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -25,9 +26,11 @@ export const Form = ({ Error, setError }) => {
         setLoading(false);
       } else {
         setCredentials(resData);
+        setUserName(resData.name);
         setAuth({ user: resData });
         setLoading(false);
         navigate("/create", { replace: true });
+        localStorage.setItem("user", JSON.stringify(resData));
       }
     } catch (error) {
       setLoading(false);
