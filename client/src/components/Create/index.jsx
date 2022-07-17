@@ -35,7 +35,7 @@ export const CreateComponent = () => {
           <ul className="flex flex-col ">
             <Link to="/" className="">
               <img
-                src="./src/public/brainstorm.png"
+                src="/brainstorm.png"
                 alt="mo img"
                 className="p-3   w-16  transition ease-out object-cover hover:animate-bounce"
               />

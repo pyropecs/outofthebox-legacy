@@ -15,12 +15,10 @@ export const Form = ({ Error, setError }) => {
   async function submitHandler(e) {
     e.preventDefault();
     setLoading(true);
-    const token = localStorage.getItem("user");
-    const stringToken = JSON.parse(token).token;
+
     const credentials = {
       name: Name,
       password: PassWord,
-      stringToken,
     };
     try {
       const resData = await fetchUserPostAsync(credentials);
