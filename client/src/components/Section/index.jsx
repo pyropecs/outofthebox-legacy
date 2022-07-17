@@ -12,7 +12,7 @@ const SectionContainer = () => {
 
   useEffect(() => {
     const userCredit = JSON.parse(localStorage.getItem("user"));
-    console.log(userCredit);
+
     if (userCredit) {
       setAuth({ user: userCredit });
       setUserName(userCredit.name);

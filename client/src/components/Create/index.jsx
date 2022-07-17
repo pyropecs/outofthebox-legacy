@@ -7,13 +7,17 @@ import { Link, useLocation, useNavigate, useRoutes } from "react-router-dom";
 import { useAuth } from "../../context/context";
 import BlogForm from "./BlogForm";
 import LoadingCompo from "../Loading";
+import { useEffect } from "react";
 
 export const CreateComponent = () => {
-  const { setAuth, Loading } = useAuth();
+  const { Auth, setAuth, Loading } = useAuth();
   const [BarClick, setBarClick] = useState(false);
   const iconArray = [FaPlus, GiSpanner, IoIosExit];
+  const id = useId();
+
   function logout() {
     localStorage.removeItem("user");
+
     setAuth({ user: false });
   }
 
@@ -24,7 +28,7 @@ export const CreateComponent = () => {
 
   return (
     <>
-      <div className="h-screen  bg-white flex md:gap-24 ">
+      <div className="h-screen overflow-scroll bg-white flex md:gap-24 ">
         <header
           className={`bg-black w-20 h-full ${display}   md:block text-stone-200  font-semibold pt-2   border-solid border-b-2 border-b-stone-200`}
         >
@@ -40,7 +44,7 @@ export const CreateComponent = () => {
             {iconArray.map((IconName, index) => {
               if (index !== iconArray.length - 1) {
                 return (
-                  <Link to="/new" id={index}>
+                  <Link to="/new" key={`${id}${index}`}>
                     <div className=" text-lg  h-20 w-16 pt-2  pb-2 m-auto transition-all hover:animate-pulse visited::text-green-200 ">
                       <IconName color="#fff" size={48} />
                     </div>
@@ -48,7 +52,7 @@ export const CreateComponent = () => {
                 );
               } else {
                 return (
-                  <Link to="/login" id={index}>
+                  <Link to="/login" id={index} key={`${id}${index}`}>
                     <div
                       onClick={logout}
                       className=" text-lg  h-20 w-16 pt-2  pb-2 m-auto transition-all hover:animate-pulse visited::text-green-200 "

@@ -13,8 +13,11 @@ export default function Header() {
     document.documentElement.style.overflowX = "hidden";
   }
   return (
-    <header className="bg-black h-20 w-full      text-stone-200   pt-2   ">
-      <div className=" absolute left-1/3 ">
+    <header
+      id="top"
+      className="bg-black h-20 w-full      text-stone-200   pt-2   "
+    >
+      <div className=" absolute md:left-1/3 ">
         <Link to="/" className="flex">
           <h1 className="font-sans font-semibold max-w-full pt-5 text-2xl pl-4 pr-3 border-solid border-r-2 border-b-stone-200 tracking-wide">
             OutOfTheBox

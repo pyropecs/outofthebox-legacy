@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import ImageUpload from "./ImageUpload";
 
 import { useState } from "react";
@@ -14,7 +14,7 @@ const BlogForm = ({}) => {
     "Fantasy",
     "Real Incident",
   ];
-
+  const id = useId();
   const [Title, setTitle] = useState("");
   const [Option, setOption] = useState("");
   const [PreviewFile, setPreviewFile] = useState("");
@@ -33,12 +33,14 @@ const BlogForm = ({}) => {
       navigate("/create", { replace: true });
       return;
     }
+    const token = JSON.parse(localStorage.getItem("user")).token;
     const blog = {
       name: UserName,
       title: Title,
       categories: Option,
       img: PreviewFile,
       content: Content,
+      token: token,
     };
     try {
       const resData = await fetchAsync(blog);
@@ -77,7 +79,7 @@ const BlogForm = ({}) => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="name"
+              htmlFor="name"
             >
               Title
             </label>
@@ -92,7 +94,7 @@ const BlogForm = ({}) => {
           <div className="mb-4">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-state"
+              htmlFor="grid-state"
             >
               Categories
             </label>
@@ -101,8 +103,10 @@ const BlogForm = ({}) => {
                 onChange={(e) => setOption(e.target.value)}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               >
-                {catgories.map((category) => (
-                  <option value={category}>{category}</option>
+                {catgories.map((category, index) => (
+                  <option key={`${id}${index}`} value={category}>
+                    {category}
+                  </option>
                 ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

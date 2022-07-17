@@ -29,13 +29,16 @@ export const SignUp = () => {
     };
     try {
       setLoading(true);
-      let res = await fetch("http://localhost:5000/signup", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
+      let res = await fetch(
+        "https://hidden-hollows-92619.herokuapp.com/signup",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
 
-        body: JSON.stringify(userData),
-      }).catch(() => {
+          body: JSON.stringify(userData),
+        }
+      ).catch(() => {
         setLoading(false);
 
         setAuth({ user: false });
@@ -62,7 +65,7 @@ export const SignUp = () => {
       setLoading(false);
       navigate("/signup");
     } else {
-      localStorage.setItem("user", resDatas);
+      localStorage.setItem("user", JSON.stringify(resDatas));
       setAuth(resDatas);
       setUserName(name);
       setLoading(false);

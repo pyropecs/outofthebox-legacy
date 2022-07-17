@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useEffect } from "react";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -38,10 +39,16 @@ export const useName = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [Auth, setAuth] = useState({ user: false });
+  const getUsers = JSON.parse(localStorage.getItem("user"));
+  const [Auth, setAuth] = useState({ user: getUsers });
   const [Loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [Error, setError] = useState("");
+  useEffect(() => {
+    if (getUsers) {
+      setAuth(getUsers);
+    }
+  }, []);
 
   return (
     <authContext.Provider

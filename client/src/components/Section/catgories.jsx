@@ -1,4 +1,4 @@
-import React from "react";
+import { useId } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -8,6 +8,8 @@ import {
 } from "../../fixtures/categoriesArray";
 
 const Categories = () => {
+  const id = useId();
+
   return (
     <>
       {categories.map((category, index) => {
@@ -16,6 +18,7 @@ const Categories = () => {
         const imgCard3 = index + 1 === 3 ? "md:w-[678px]" : "w-[720px]";
         return (
           <div
+            key={`${id}${index}`}
             className={`flex ${flexDirection} font-poppins flex-col items-center bg-gray-100`}
           >
             <img

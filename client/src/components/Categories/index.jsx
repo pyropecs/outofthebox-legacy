@@ -11,6 +11,8 @@ const Categories = ({ route }) => {
   async function getUsers() {
     const resData = await fetchGetAsync(route);
     const cards = resData?.blogs.map((blog, idx) => {
+      console.log(blog);
+
       const newImgUrl = imgOptimizer(blog.imgUrl);
       return {
         ...blog,

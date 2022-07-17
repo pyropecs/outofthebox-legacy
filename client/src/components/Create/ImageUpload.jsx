@@ -37,7 +37,7 @@ const ImageUpload = ({
       <div className="text-black flex align-center">
         <label
           className="block text-gray-700  text-sm self-center font-bold mb-2"
-          for="name"
+          htmlFor="name"
         >
           IMAGE UPLOAD:
         </label>

@@ -100,7 +100,7 @@ const Footer = () => {
               Explore our site
             </h5>
             <button className="bg-green-600 text-white hover:bg-green-700 rounded py-2 px-6 md:px-12 transition-colors duration-300">
-              Explore
+              <a href="#top">Explore</a>
             </button>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import React from "react";
+import { useId } from "react";
 import { Link } from "react-router-dom";
 import { useName } from "../../context/context";
 
 const cards = ({ ResData, title }) => {
   const { setClickedBlog } = useName();
-
+  const id = useId();
   return (
     <>
       <div className="m-auto py-10  w-full">
@@ -15,7 +16,11 @@ const cards = ({ ResData, title }) => {
       <div className="md:grid flex flex-col  items-center  md:grid-cols-3  h-auto w-full">
         {ResData?.map((blog, elem) => {
           return (
-            <Link onClick={() => setClickedBlog(blog)} to={blog._id}>
+            <Link
+              key={`${elem}${id}${blog._id}`}
+              onClick={() => setClickedBlog(blog)}
+              to={blog._id}
+            >
               <div
                 className={`max-w-sm  relative rounded m-3 overflow-hidden   shadow-lg `}
               >

@@ -9,6 +9,7 @@ const corsOptions = {
   origin: true,
   credentials: true,
 };
+const PORT = process.env.PORT || 5000;
 
 const { urlencoded } = require("express");
 const userRoute = require("./routes/userRoute");
@@ -22,8 +23,8 @@ app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
 app.use(userRoute);
-app.use(createRoute);
 app.use(loginRoute);
+app.use(createRoute);
 app.get("/categories/:categories", homePage);
 
-app.listen(5000);
+app.listen(PORT, () => console.log(`server running on ${PORT}`));
