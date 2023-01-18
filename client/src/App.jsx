@@ -5,8 +5,6 @@ import SectionContainer from "./components/Section";
 import Footer from "./components/Footer";
 
 export default function App() {
-  
-  
   return (
     <div className="">
       <Header />
