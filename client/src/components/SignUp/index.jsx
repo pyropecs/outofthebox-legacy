@@ -30,7 +30,7 @@ export const SignUp = () => {
     try {
       setLoading(true);
       let res = await fetch(
-        "https://hidden-hollows-92619.herokuapp.com/signup",
+        "https://outofthebox.onrender.com/signup",
         {
           method: "POST",
           credentials: "include",

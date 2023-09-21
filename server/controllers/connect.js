@@ -5,13 +5,13 @@ async function connect() {
   let userConnection = {};
   let CreateConnection = {};
   userConnection = await createConnection(
-    process.env.MONGODB1_URI,
+    "mongodb+srv://admin:12345@cluster0.gxvbm.mongodb.net/userdata?retryWrites=true&w=majority",
     () => console.log("connected to user db"),
     (err) => console.log(`ERROR Code:${err} check your internet connection`)
   );
 
   CreateConnection = await createConnection(
-    process.env.MONGODB2_URI,
+    "mongodb+srv://admin:12345@cluster0.gxvbm.mongodb.net/blogData?retryWrites=true&w=majority",
     () => {
       console.log("connected to blog db");
     },

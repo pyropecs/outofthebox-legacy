@@ -12,7 +12,7 @@ const corsOptions = {
 const PORT = process.env.PORT || 5000;
 
 const { urlencoded } = require("express");
-const userRoute = require("./routes/userRoute");
+
 const createRoute = require("./routes/createRoute");
 const { connect } = require("./controllers/connect");
 const loginRoute = require("./routes/loginRoute");
@@ -22,7 +22,6 @@ app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 
-app.use(userRoute);
 app.use(loginRoute);
 app.use(createRoute);
 app.get("/categories/:categories", homePage);

@@ -1,5 +1,5 @@
 export async function fetchAsync(data) {
-  let res = await fetch("https://hidden-hollows-92619.herokuapp.com/create", {
+  let res = await fetch("https://outofthebox.onrender.com/create", {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
